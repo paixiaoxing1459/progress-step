@@ -1,0 +1,106 @@
+/*颜色会多次使用，先给它们定义名字*/
+/*这是 css 函数，定义了两个颜色属性 用 var() 函数来调用*/
+:root {
+    --line-border-fill: #3498db;
+    --line-border-empty: #e0e0e0;
+}
+
+/*统配选择器*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f6f7f6;
+    /* font-family ， css 属性，设定字体*/
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 350px;
+    position: relative;
+}
+
+
+/* 伪元素 ::before ，定义灰色的线 */
+.progress-container::before {
+    content: "";
+    background-color: var(--line-border-empty);
+    height: 4px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    margin-top: -2px;
+    z-index: -1;
+}
+
+.progress {
+    background-color: var(--line-border-fill);
+    position: absolute;
+    top: 50%;
+    height: 4px;
+    /* 这个和负 margin 效果一样 */
+    transform: translateY(-50%);
+    width: 0%;
+    z-index: -1;
+    transition:width 0.7s ease;
+}
+
+.circle {
+    background-color: #fff;
+    color: #999;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    /*  让它垂直居中  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid var(--line-border-empty);
+    transition: border-color 0.9s ease;
+}
+
+.circle.active{
+    border-color: var(--line-border-fill);
+}
+
+.btn{
+    background-color: var(--line-border-fill);
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 8px 30px;
+    /* 如掉边框 */
+    border: 0;
+    font-size: 14px;
+    margin: 5px;
+}
+
+/* css 伪类， :active 选择器，它让页面能在浏览器监测到激活时给出反馈*/
+.btn:active{
+    transform: scale(0.9);
+}
+/* css 伪类， :focus 选择器，用于选择具有焦点的元素*/
+.btn:focus{
+    outline: 0;
+}
+
+/* 给无法点击的元素设置样式 */
+.btn:disabled{
+    background-color: var(--line-border-empty);
+    /* 设置鼠标的样子 */
+    cursor: not-allowed;
+}
